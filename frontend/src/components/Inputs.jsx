@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { func } from 'prop-types'
 import axios from '../api/axios'
 
-const Inputs = ({ setLoading, setError, setData }) => {
+const Inputs = ({ setLoading, setData }) => {
     const coalRef = useRef(null)
     const oilRef = useRef(null)
     const gasRef = useRef(null)
@@ -36,62 +36,67 @@ const Inputs = ({ setLoading, setError, setData }) => {
 
             setData(res.data.data)
         } catch (error) {
-            setError(error)
+            console.log(error)
         } finally {
             setLoading(false)
         }
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="coal">Маса вугілля (т):</label>
-                <input
-                    id="coal"
-                    ref={coalRef}
-                    name="coal"
-                    required
-                    min="0"
-                    type="number"
-                />
-            </div>
-            <div>
-                <label htmlFor="oil">Маса мазуту (т):</label>
-                <input
-                    id="oil"
-                    ref={oilRef}
-                    name="oil"
-                    required
-                    min="0"
-                    type="number"
-                />
-            </div>
-            <div>
-                <label htmlFor="gas">Об'єм газу (м^3):</label>
-                <input
-                    id="gas"
-                    ref={gasRef}
-                    name="gas"
-                    required
-                    min="0"
-                    type="number"
-                />
-            </div>
+        <div className="inputs">
+            <h2>Вхідні дані</h2>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="coal">Маса вугілля (т):</label>
+                    <input
+                        id="coal"
+                        step="0.01"
+                        ref={coalRef}
+                        name="coal"
+                        required
+                        min="0"
+                        type="number"
+                    />
+                </div>
+                <div>
+                    <label htmlFor="oil">Маса мазуту (т):</label>
+                    <input
+                        id="oil"
+                        step="0.01"
+                        ref={oilRef}
+                        name="oil"
+                        required
+                        min="0"
+                        type="number"
+                    />
+                </div>
+                <div>
+                    <label htmlFor="gas">{"Об'єм газу (м^3):"}</label>
+                    <input
+                        id="gas"
+                        step="0.01"
+                        ref={gasRef}
+                        name="gas"
+                        required
+                        min="0"
+                        type="number"
+                    />
+                </div>
 
-            <button>Розрахувати</button>
-            <button onClick={setExampleData} type="button">
-                Дані з контрольного прикладу
-            </button>
-            <button onClick={setVariantData} type="button">
-                Дані з варіанту (5)
-            </button>
-        </form>
+                <button>Розрахувати</button>
+                <button onClick={setExampleData} type="button">
+                    Дані з контрольного прикладу
+                </button>
+                <button onClick={setVariantData} type="button">
+                    Дані з варіанту (5)
+                </button>
+            </form>
+        </div>
     )
 }
 
 Inputs.propTypes = {
     setLoading: func,
-    setError: func,
     setData: func,
 }
 
