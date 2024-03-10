@@ -21,6 +21,7 @@ const Inputs = ({ setLoading, setData }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const controller = new AbortController()
 
         try {
             setLoading(true)
@@ -32,6 +33,7 @@ const Inputs = ({ setLoading, setData }) => {
 
             const res = await axios.post('/calculate', formData, {
                 headers: { 'Content-Type': 'application/json' },
+                signal: controller.signal,
             })
 
             setData(res.data.data)
@@ -40,6 +42,8 @@ const Inputs = ({ setLoading, setData }) => {
         } finally {
             setLoading(false)
         }
+
+        return () => controller.abort()
     }
 
     return (
