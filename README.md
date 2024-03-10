@@ -27,4 +27,4 @@
 2. npm i
 3. npm run start
 
-Застосунок доступний онлайн за посиланням
+Застосунок доступний онлайн за посиланням [calc-web2.netlify.app](https://calc-web2.netlify.app/)
