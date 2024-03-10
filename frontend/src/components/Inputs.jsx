@@ -30,7 +30,7 @@ const Inputs = ({ setLoading, setError, setData }) => {
                 gas: gasRef.current.value,
             }
 
-            const res = await axios.post('', formData, {
+            const res = await axios.post('/calculate', formData, {
                 headers: { 'Content-Type': 'application/json' },
             })
 
